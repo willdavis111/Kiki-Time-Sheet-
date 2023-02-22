@@ -17,13 +17,19 @@
         <div>
             <startLable for="start">Start Time: </startLable>
             <input type=text id="start" name="start" required>
+            <input type="radio" id = 'stAM' value="AM" name="strb">AM
+            <input type="radio" id = 'stPM' value="PM" name="strb">PM
         </div>
         </div>
             <stopLable for="stop">Stop Time:  </stopLable>
             <input type=text id="stop" name="stop" required>
+            <input type="radio" id = 'spAM' value="AM" name="sprb">AM
+            <input type="radio" id = 'spPM' value="PM" name="sprb">PM
         </div>
-        <input id=timeButton type="button" value="Log">
-        <input type = "reset">
+        <div>
+            <input id=timeButton type="button" value="Log">
+            <input type = "reset">
+        </div>
     </form>
     <table border="1" id="table1">
         <thead>
@@ -54,27 +60,7 @@
         </tr>
     </table>
 
-
     <sheet class="output" id="output"></sheet>
-    <script>
-        let cli1 = document.getElementById('client');
-        let startTime = document.getElementById('start')
-        let endTime = document.getElementById('stop')
-        const btn1 = document.getElementById('timeButton');
-        const out1 = document.getElementById('output')
-        let delta = 0
-
-        function logTime() {
-            if (startTime < endTime) {
-                delta = endTime - startTime
-            } else {
-                delta = (12 - startTime) + endTime
-            }
-            out1.innerHTML +=  `${cli1.value} | ${startTime.value} | ${endTime.value} | ${delta}`;
-        }
-
-        btn1.addEventListener('click', logTime);
-
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>
