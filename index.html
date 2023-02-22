@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Sheet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body id="main">
+    <h1 id="title">KIKI Time Sheet</h1>
+    <form action="/" method="GET">
+        <div>
+            <clientLabel for="Client">Client:</lientLabel>
+            <input type=text id="client" name="Client" required>
+        </div>
+        <div>
+            <startLable for="start">Start Time: </startLable>
+            <input type=text id="start" name="start" required>
+        </div>
+        </div>
+            <stopLable for="stop">Stop Time:  </stopLable>
+            <input type=text id="stop" name="stop" required>
+        </div>
+        <input id=timeButton type="button" value="Log">
+        <input type = "reset">
+    </form>
+    <table border="1" id="table1">
+        <thead>
+            <tr>
+                <td>Company</td>
+                <td>Start</td>
+                <td>End</td>
+                <td>Delta</td>
+            </tr>
+        </thead>
+        <tr>
+            <td1></td1>
+            <td2></td2>
+            <td3></td3>
+            <td4></td4>
+        </tr>
+        <tr>
+            <td5></td5>
+            <td6></td6>
+            <td7></td7>
+            <td8></td8>
+        </tr>
+        <tr>
+            <td9></td9>
+            <td10></td10>
+            <td11></td11>
+            <td12></td12>
+        </tr>
+    </table>
+
+
+    <sheet class="output" id="output"></sheet>
+    <script>
+        let cli1 = document.getElementById('client');
+        let startTime = document.getElementById('start')
+        let endTime = document.getElementById('stop')
+        const btn1 = document.getElementById('timeButton');
+        const out1 = document.getElementById('output')
+        let delta = 0
+
+        function logTime() {
+            if (startTime < endTime) {
+                delta = endTime - startTime
+            } else {
+                delta = (12 - startTime) + endTime
+            }
+            out1.innerHTML +=  `${cli1.value} | ${startTime.value} | ${endTime.value} | ${delta}`;
+        }
+
+        btn1.addEventListener('click', logTime);
+
+    </script>
+</body>
+</html>
