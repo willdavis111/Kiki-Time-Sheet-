@@ -1,12 +1,10 @@
-let cli1 = document.getElementById('client').value;
-let startTime = document.getElementById('start').value;
-let endTime = document.getElementById('stop').value;
+let startTime = document.getElementById('start');
+let endTime = document.getElementById('stop');
 const btn1 = document.getElementById('timeButton');
 const out1 = document.getElementById('output');
-let delta = 0;
 var startparts, endparts, startDate, endDate;
-let hourSlot, minuteSlot, timeDiff
-var logArray = []
+let hourSlot, minuteSlot, timeDelta, timeObj, delta, runTot, fillTotal
+let totHour = 0, totMin = 0
 
 // This function finds the delta between two times provided by user
 function findDelta() {
@@ -35,61 +33,48 @@ function findDelta() {
 function milisecToHour() {
     hourSlot = Math.floor((Number(delta) / 1000 / 60 / 60) % 24);
     minuteSlot = Math.floor((Number(delta) / 1000 / 60) % 60);
-    timeDiff = `${String(hourSlot)}:${String(minuteSlot)}`
+    timeDelta = `${String(hourSlot)}:${String(minuteSlot)}`
+}
+
+//rounds the time spent on task based on dropdown perameter
+function rounding() {
+    
 }
 
 // creates an object for the work table
-function logItem(compName, startTime, endTime, timeDiff) {
-    this.company = compName;
-    this.start = startTime;
-    this.end = endTime;
-    this.diff = timeDiff;
+function makeObj() {
+    timeObj = {company: document.getElementById('client').value,
+        start: document.getElementById('start').value,
+        end: document.getElementById('stop').value,
+        timeDiff: String(timeDelta)}
 }
 
-
-function addToLogArray(newObj) {
-    logArray.push(newObj)
+// this adds a running total of time worked to the table
+function runningTotal() {
+    totHour += hourSlot;
+    totMin += minuteSlot;
+    if (Number(totMin) > 61) {
+        totHour += 1;
+        totMin -= 60;
+    }
+    runTot = `${String(totHour)}:${String(totMin)}`;
+    fillTotal = document.getElementById("tabTotal");
+    fillTotal.innerHTML = String(runTot)
 }
 
-
-// const testItem1 = [
-//     { company: "test1", start: "8:30", end: "12:30", diff: "4:00"},
-//     { company: "test2", start: "12:30", end: "2:30", diff: "2:00"},
-//     { company: "test3", start: "2:30", end: "4:00", diff: "1:30"}
-// ];
-
-// // this function takes generated information and fills in a table 
-// function fillTable(testItem) {
-//     const table = document.getElementById("tableBody");
-//     testItem.forEach( item => {
-//         let row = table.insertRow();
-//         let company = row.insertCell(0);
-//         company.innerHTML = item.company;
-//         let start = row.insertCell(1);
-//         start.innerHTML = item.start;
-//         let end = row.insertCell(2);
-//         end.innerHTML = item.end;
-//         let diff = row.insertCell(3);
-//         diff.innerHTML = item.diff;
-//     })
-// }
-
-// this function takes generated information and fills in a table 
-function fillTable(testItem) {
+// this function fills in a table with created objects
+function fillTable(item) {
     const table = document.getElementById("tableBody");
-    testItem.forEach( item => {
-        let row = table.insertRow();
-        let company = row.insertCell(0);
-        company.innerHTML = item.company;
-        let start = row.insertCell(1);
-        start.innerHTML = item.start;
-        let end = row.insertCell(2);
-        end.innerHTML = item.end;
-        let diff = row.insertCell(3);
-        diff.innerHTML = item.diff;
-    })
+    let row = table.insertRow();
+    let company = row.insertCell(0);
+    company.innerHTML = item.company;
+    let start = row.insertCell(1);
+    start.innerHTML = item.start;
+    let end = row.insertCell(2);
+    end.innerHTML = item.end;
+    let diff = row.insertCell(3);
+    diff.innerHTML = item.timeDiff;
 }
-
 
 // clears fields after information is logged
 function clearField() {
@@ -106,14 +91,10 @@ function clearField() {
 function logTime() {
     findDelta();
     milisecToHour(delta);
-    let newObj = new logItem(cli1, startTime, endTime, timeDiff)
-    console.log(newObj)
-    // addToLogArray(newObj)
-    // fillTable(logArray)
-    // out1.innerHTML +=  `${cli1.value} | ${startTime.value} | ${endTime.value} | ${timeDiff}`;
-    clearField()
+    makeObj();
+    fillTable(timeObj);
+    runningTotal();
+    clearField();
 }
 
 btn1.addEventListener('click', logTime);
-
-// fillTable(testItem1);
