@@ -1,10 +1,11 @@
+let cli1 = document.getElementById('client');
 let startTime = document.getElementById('start');
 let endTime = document.getElementById('stop');
 const btn1 = document.getElementById('timeButton');
 const out1 = document.getElementById('output');
+let delta = 0;
 var startparts, endparts, startDate, endDate;
-let hourSlot, minuteSlot, timeDelta, timeObj, delta, runTot, fillTotal
-let totHour = 0, totMin = 0
+let hourSlot, minuteSlot, timeDiff
 
 // This function finds the delta between two times provided by user
 function findDelta() {
@@ -33,68 +34,15 @@ function findDelta() {
 function milisecToHour() {
     hourSlot = Math.floor((Number(delta) / 1000 / 60 / 60) % 24);
     minuteSlot = Math.floor((Number(delta) / 1000 / 60) % 60);
-    timeDelta = `${String(hourSlot)}:${String(minuteSlot)}`
-}
-
-//rounds the time spent on task based on dropdown perameter
-function rounding() {
-    
-}
-
-// creates an object for the work table
-function makeObj() {
-    timeObj = {company: document.getElementById('client').value,
-        start: document.getElementById('start').value,
-        end: document.getElementById('stop').value,
-        timeDiff: String(timeDelta)}
-}
-
-// this adds a running total of time worked to the table
-function runningTotal() {
-    totHour += hourSlot;
-    totMin += minuteSlot;
-    if (Number(totMin) > 61) {
-        totHour += 1;
-        totMin -= 60;
-    }
-    runTot = `${String(totHour)}:${String(totMin)}`;
-    fillTotal = document.getElementById("tabTotal");
-    fillTotal.innerHTML = String(runTot)
-}
-
-// this function fills in a table with created objects
-function fillTable(item) {
-    const table = document.getElementById("tableBody");
-    let row = table.insertRow();
-    let company = row.insertCell(0);
-    company.innerHTML = item.company;
-    let start = row.insertCell(1);
-    start.innerHTML = item.start;
-    let end = row.insertCell(2);
-    end.innerHTML = item.end;
-    let diff = row.insertCell(3);
-    diff.innerHTML = item.timeDiff;
-}
-
-// clears fields after information is logged
-function clearField() {
-    document.getElementById('client').value="";
-    document.getElementById('start').value="";
-    document.getElementById('stop').value="";
-    document.getElementById('stAM').checked=false;
-    document.getElementById('stPM').checked=false;
-    document.getElementById('spAM').checked=false;
-    document.getElementById('spPM').checked=false;
+    timeDiff = `${String(hourSlot)}:${String(minuteSlot)}`
 }
 
 // function called when a time is submitted and fills the log 
 function logTime() {
     findDelta();
     milisecToHour(delta);
-    makeObj();
-    fillTable(timeObj);
-    runningTotal();
-    clearField();
+    out1.innerHTML +=  `${cli1.value} | ${startTime.value} | ${endTime.value} | ${timeDiff}`;
 }
 
 btn1.addEventListener('click', logTime);
+
