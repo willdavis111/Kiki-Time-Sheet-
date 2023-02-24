@@ -1,20 +1,82 @@
+* {
+    box-sizing: border-box;
+}
 
-#main {
-    background-color: aqua;
+/* Clear fix hack */
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clear {
+   clear: both;
+}
+
+
+body {
+    background-color: rgb(32, 220, 220, .75);
     color: black;
     text-align: center;
-    padding: auto;
-} */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+} 
 
 
 body h1 {
     text-align: center;
 }
 
+form {
+    border: 5px solid black;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+form * {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 1%;
+
+}
+.startTime, .stopTime {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.buttons * {
+    width: 35%;
+    margin-left: 35%;
+    text-align: center;
+    border-radius: 7%;
+    background-color:rgb(111, 182, 121);
+    font-weight: bold;
+    padding-left: 12%;
+
+}
+
+
 #table1 {
-    background-color: plum;
-    margin-top: 5%;
+    background-color: rgb(156, 112, 156);
+    /* margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
-    width: 100px;
+    width: 100px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-weight: bold;
 }
+
+
+
+

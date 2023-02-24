@@ -7,29 +7,42 @@
     <title>Time Sheet</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body id="main">
+<body>
     <h1 id="title">KIKI Time Sheet</h1>
     <form action="/" method="GET">
+        <div class="empName">
+            <label for="employeeName">Employee Name:</label>
+            <input type="text" name="employee name" required>
+        </div>
         <div>
             <clientLabel for="Client">Client:</lientLabel>
             <input type=text id="client" name="Client" required>
         </div>
-        <div>
+        <div class="startTime">
             <startLable for="start">Start Time: </startLable>
             <input type=text id="start" name="start" required>
             <input type="radio" id = 'stAM' value="AM" name="strb">AM
             <input type="radio" id = 'stPM' value="PM" name="strb">PM
         </div>
-        </div>
+        <div class="stopTime">
             <stopLable for="stop">Stop Time:  </stopLable>
             <input type=text id="stop" name="stop" required>
             <input type="radio" id = 'spAM' value="AM" name="sprb">AM
             <input type="radio" id = 'spPM' value="PM" name="sprb">PM
         </div>
-        <div>
+        <div id="charge">
+            <label for="chargeBy">Charge By:</label>
+            <select name="chargeBy" id="chargeBy" placeholder="charge by">
+                <option value="15">15 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+            </select>
+        </div>
+        <div class="buttons">
             <input id=timeButton type="button" value="Log">
             <input type = "reset">
         </div>
+        
     </form>
     <table border="1" id="table1">
         <thead>
