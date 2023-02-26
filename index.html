@@ -7,26 +7,26 @@
     <title>Time Sheet</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body id="main">
+<body>
     <h1 id="title">KIKI Time Sheet</h1>
     <form action="/" method="GET">
+        <div class="empName">
+            <label for="employeeName">Employee Name:</label>
+            <input type="text" name="employee name" required>
+        </div>
         <div>
             <clientLabel for="Client">Client:</lientLabel>
-            <input type=text id="client" name="Client" class="textFields" required>
+            <input type=text id="client" name="Client" required>
         </div>
-        <div>
-            <clientLabel for="Task">Task:</lientLabel>
-            <input type=text id="task" name="task" class="textFields" required>
-        </div>
-        <div>
+        <div class="startTime">
             <startLable for="start">Start Time: </startLable>
-            <input type=text id="start" name="start" class="textFields" required>
+            <input type=text id="start" name="start" required>
             <input type="radio" id = 'stAM' value="AM" name="strb">AM
             <input type="radio" id = 'stPM' value="PM" name="strb">PM
         </div>
-        </div>
+        <div class="stopTime">
             <stopLable for="stop">Stop Time:  </stopLable>
-            <input type=text id="stop" name="stop" class="textFields" required>
+            <input type=text id="stop" name="stop" required>
             <input type="radio" id = 'spAM' value="AM" name="sprb">AM
             <input type="radio" id = 'spPM' value="PM" name="sprb">PM
         </div>
@@ -38,30 +38,42 @@
                 <option value="60">1 hour</option>
             </select>
         </div>
-        <div>
+        <div class="buttons">
             <input id=timeButton type="button" value="Log">
             <input type = "reset">
         </div>
+        
     </form>
-    <table border="1" id="table1" class=" table" id="log">
+    <table border="1" id="table1">
         <thead>
             <tr>
                 <td>Company</td>
-                <td>Task</td>
                 <td>Start</td>
                 <td>End</td>
                 <td>Delta</td>
             </tr>
         </thead>
-        <tbody id="tableBody"></tbody>
-        <tfoot>
-            <td colspan="0">Total:</td>
-            <td id="tabTotal"></td>
-        </tfoot>
+        <tr>
+            <td1></td1>
+            <td2></td2>
+            <td3></td3>
+            <td4></td4>
+        </tr>
+        <tr>
+            <td5></td5>
+            <td6></td6>
+            <td7></td7>
+            <td8></td8>
+        </tr>
+        <tr>
+            <td9></td9>
+            <td10></td10>
+            <td11></td11>
+            <td12></td12>
+        </tr>
     </table>
-    <div>
-        <input id=clearTable type="button" value="Clear Table">
-    </div>
+
+    <sheet class="output" id="output"></sheet>
     <script src="index.js"></script>
 </body>
 </html>
