@@ -1,7 +1,7 @@
 let startTime = document.getElementById('start');
 let endTime = document.getElementById('stop');
 const btn1 = document.getElementById('timeButton');
-const out1 = document.getElementById('output');
+const clearButton = document.getElementById('clearTable');
 var startparts, endparts, startDate, endDate;
 let hourSlot, minuteSlot, timeDelta, timeObj, delta, runTot, fillTotal
 let totHour = 0, totMin = 0
@@ -45,13 +45,13 @@ function milisecToHour(delta) {
 }
 
 //rounds the time spent on task based on dropdown perameter
-function rounding() {
-    
-}
+// function rounding() {
+// }
 
 // creates an object for the work table
 function makeObj() {
     timeObj = {company: document.getElementById('client').value,
+        task: document.getElementById('task').value,
         start: document.getElementById('start').value,
         end: document.getElementById('stop').value,
         timeDiff: String(timeDelta)}
@@ -67,7 +67,7 @@ function runningTotal() {
     }
     runTot = `${String(totHour)}:${String(totMin)}`;
     fillTotal = document.getElementById("tabTotal");
-    fillTotal.innerHTML = String(runTot)
+    fillTotal.innerHTML = String(runTot);
 }
 
 // this function fills in a table with created objects
@@ -76,17 +76,20 @@ function fillTable(item) {
     let row = table.insertRow();
     let company = row.insertCell(0);
     company.innerHTML = item.company;
-    let start = row.insertCell(1);
+    let task = row.insertCell(1);
+    task.innerHTML = item.task;
+    let start = row.insertCell(2);
     start.innerHTML = item.start;
-    let end = row.insertCell(2);
+    let end = row.insertCell(3);
     end.innerHTML = item.end;
-    let diff = row.insertCell(3);
+    let diff = row.insertCell(4);
     diff.innerHTML = item.timeDiff;
 }
 
 // clears fields after information is logged
 function clearField() {
     document.getElementById('client').value="";
+    document.getElementById('task').value="";
     document.getElementById('start').value="";
     document.getElementById('stop').value="";
     document.getElementById('stAM').checked=false;
@@ -104,4 +107,12 @@ function logTime() {
     clearField();
 }
 
+// clears table
+function clearTable(){
+    document.getElementById('tableBody').innerHTML="";
+    fillTotal.innerHTML = '';
+    runTot = '', totHour = 0, totMin = 0;
+}
+
 btn1.addEventListener('click', logTime);
+clearButton.addEventListener('click', clearTable);

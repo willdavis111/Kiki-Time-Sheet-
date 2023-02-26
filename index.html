@@ -12,19 +12,31 @@
     <form action="/" method="GET">
         <div>
             <clientLabel for="Client">Client:</lientLabel>
-            <input type=text id="client" name="Client" required>
+            <input type=text id="client" name="Client" class="textFields" required>
+        </div>
+        <div>
+            <clientLabel for="Task">Task:</lientLabel>
+            <input type=text id="task" name="task" class="textFields" required>
         </div>
         <div>
             <startLable for="start">Start Time: </startLable>
-            <input type=text id="start" name="start" required>
+            <input type=text id="start" name="start" class="textFields" required>
             <input type="radio" id = 'stAM' value="AM" name="strb">AM
             <input type="radio" id = 'stPM' value="PM" name="strb">PM
         </div>
         </div>
             <stopLable for="stop">Stop Time:  </stopLable>
-            <input type=text id="stop" name="stop" required>
+            <input type=text id="stop" name="stop" class="textFields" required>
             <input type="radio" id = 'spAM' value="AM" name="sprb">AM
             <input type="radio" id = 'spPM' value="PM" name="sprb">PM
+        </div>
+        <div id="charge">
+            <label for="chargeBy">Charge By:</label>
+            <select name="chargeBy" id="chargeBy" placeholder="charge by">
+                <option value="15">15 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+            </select>
         </div>
         <div>
             <input id=timeButton type="button" value="Log">
@@ -35,6 +47,7 @@
         <thead>
             <tr>
                 <td>Company</td>
+                <td>Task</td>
                 <td>Start</td>
                 <td>End</td>
                 <td>Delta</td>
@@ -46,8 +59,9 @@
             <td id="tabTotal"></td>
         </tfoot>
     </table>
-
-    <sheet class="output" id="output"></sheet>
+    <div>
+        <input id=clearTable type="button" value="Clear Table">
+    </div>
     <script src="index.js"></script>
 </body>
 </html>
