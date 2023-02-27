@@ -18,28 +18,27 @@
             <clientLabel for="Task">Task:</lientLabel>
             <input type=text id="task" name="task" class="textFields" required>
         </div>
-        <div>
+        <div class="startTime">
             <startLable for="start">Start Time: </startLable>
             <input type=text id="start" name="start" class="textFields" required>
             <input type="radio" id = 'stAM' value="AM" name="strb">AM
             <input type="radio" id = 'stPM' value="PM" name="strb">PM
         </div>
-        </div>
+        <div class="stopTime">
             <stopLable for="stop">Stop Time:  </stopLable>
             <input type=text id="stop" name="stop" class="textFields" required>
             <input type="radio" id = 'spAM' value="AM" name="sprb">AM
             <input type="radio" id = 'spPM' value="PM" name="sprb">PM
         </div>
         <div id="charge">
-            <label for="chargeBy">Round By:</label>
+            <label for="chargeBy">Charge By:</label>
             <select name="chargeBy" id="chargeBy" placeholder="charge by">
-                <option value="0">None</option>
                 <option value="15">15 minutes</option>
                 <option value="30">30 minutes</option>
                 <option value="60">1 hour</option>
             </select>
         </div>
-        <div>
+        <div class="buttons">
             <input id=timeButton type="button" value="Log">
             <input type = "reset">
         </div>
