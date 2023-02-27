@@ -3,7 +3,7 @@ let endTime = document.getElementById('stop');
 const btn1 = document.getElementById('timeButton');
 const clearButton = document.getElementById('clearTable');
 var startparts, endparts, startDate, endDate;
-let hourSlot, minuteSlot, timeDelta, timeObj, delta, runTot, fillTotal
+let hourSlot, minuteSlot, timeDelta, timeObj, delta, runTot, fillTotal, hour, min, array;
 let totHour = 0, totMin = 0
 
 // This function finds the delta between two times provided by user
@@ -41,12 +41,22 @@ function zeroAdd(timePiece) {
 function milisecToHour(delta) {
     hourSlot = Math.floor((Number(delta) / 1000 / 60 / 60) % 24);
     minuteSlot = Math.floor((Number(delta) / 1000 / 60) % 60);
+    rounding()
+    sixtyToHour(hourSlot, minuteSlot)
+    hourSlot = array[0]
+    minuteSlot = array[1]
     timeDelta = `${String(hourSlot)}:${String(minuteSlot)}`
 }
 
 //rounds the time spent on task based on dropdown perameter
-// function rounding() {
-// }
+function rounding() {
+    let increment = document.getElementById('chargeBy').value
+    if (increment != 0) {
+        let factor = Math.round(minuteSlot / Number(increment))
+        minuteSlot = factor * increment
+    }
+}
+
 
 // creates an object for the work table
 function makeObj() {
@@ -61,13 +71,22 @@ function makeObj() {
 function runningTotal() {
     totHour += hourSlot;
     totMin += minuteSlot;
-    if (Number(totMin) > 61) {
-        totHour += 1;
-        totMin -= 60;
-    }
+    sixtyToHour(totHour, totMin);
+    totHour = array[0]
+    totMin = array[1]
     runTot = `${String(totHour)}:${String(totMin)}`;
     fillTotal = document.getElementById("tabTotal");
     fillTotal.innerHTML = String(runTot);
+}
+
+// adds an hour when minutes reaches 61 
+function sixtyToHour(hour, min) {
+    if (Number(min) >= 60) {
+        hour += 1;
+        min -= 60;
+    }
+    array = [hour, min]
+    return array
 }
 
 // this function fills in a table with created objects
