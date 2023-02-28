@@ -1,82 +1,113 @@
-* {
-    box-sizing: border-box;
+.col-4 {
+    background-color: aqua;
+    text-align: right;
+    padding: 150px;
 }
 
-/* Clear fix hack */
-.clearfix:after {
-    content: ".";
-    display: block;
-    clear: both;
-    visibility: hidden;
-    line-height: 0;
-    height: 0;
+.col-xl-8 {
+    background-color: plum;
 }
 
-.clear {
-   clear: both;
-}
-
-
-body {
-    background-color: rgb(32, 220, 220, .75);
-    color: black;
+#title {
+    background-color: pink;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 35px;
+}
 
-} 
+#graph {
+    color: antiquewhite;
+    text-align: center;
+    background-color: white;
+    padding: 100px;
+}
 
+#graphTitle {
+    color: antiquewhite;
+    text-align: center;
+    background-color: black;
+}
 
-body h1 {
+stop, start, task, client {
+    align-content: center;
+}
+
+.textFields {
     text-align: center;
 }
-
-form {
-    border: 5px solid black;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-}
-
-form * {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-bottom: 1%;
-
-}
-.startTime, .stopTime {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-}
-.buttons * {
-    width: 35%;
-    margin-left: 35%;
-    text-align: center;
-    border-radius: 7%;
-    background-color:rgb(111, 182, 121);
-    font-weight: bold;
-    padding-left: 12%;
-
-}
-
 
 #table1 {
-    background-color: rgb(156, 112, 156);
-    /* margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100px; */
+    border: 2px solid black;
+}
+
+#graphArea {
+    background-color: black;
+}
+
+/* #nextChart {
+    
+} */
+
+/* .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+}
+
+.modal-head {
+    background-color: blue;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.modal-title {
+    color: white;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
+.modal-head .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 10px;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black .5;
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+} */
 
 
 

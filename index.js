@@ -135,3 +135,92 @@ function clearTable(){
 
 btn1.addEventListener('click', logTime);
 clearButton.addEventListener('click', clearTable);
+
+let graphb1 = document.getElementById('graphButton');
+
+const ctx = document.getElementById('myChart');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['2020','2021','2022','2023'],
+        datasets: [{
+            label: "things happenin",
+            data: [4, 12, 3, 7],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Hours'
+                },
+                beginAtZero: true,
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Clients'
+                },
+            }
+       }
+    }
+});
+
+
+const piect = document.getElementById('nextChart');
+new Chart(piect, {
+    type: 'pie',
+    data: {
+        labels: ['2020','2021','2022','2023'],
+        datasets: [{
+            label: "things happenin",
+            data: [4, 12, 3, 7],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+// const openModalButton = document.getElementById('modalButton')
+// const openModalButton = document.querySelectorAll('[data-modal-target]')
+// const closeModalButton = document.querySelectorAll('[data-close-button]')
+// const overlay = document.getElementById("overlay")
+
+// openModalButton.forEach(button => {
+//     button.addEventListener('click', () => {
+//         const modal = document.querySelector(button.datset.modalTarget)
+//         openModal(modal)
+//     })
+// })
+
+// overlay.addEventListener('click', () => {
+//     const modals = document.querySelectorAll('.modal.active')
+//     modals.forEach(modal => {
+//         closeModal(modal)
+//     })
+// })
+
+// closeModalButton.forEach(button => {
+//     button.addEventListener('click', () => {
+//         const modal = button.closest('.modal')
+//         closeModal(modal)
+//     })
+// })
+
+// function openModal(modal) {
+//     modal.classlist.add('active')
+//     overlay.classlist.add('active')
+// }
+
+// function closeModal(modal) {
+//     modal.classlist.remove('active')
+//     overlay.classlist.remove('active')
+// }
+
+// script for making a graph from collected information
