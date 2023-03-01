@@ -1,11 +1,28 @@
 .col-4 {
     background-color: aqua;
     text-align: right;
-    padding: 150px;
+    padding: 100px;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 .col-xl-8 {
     background-color: plum;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.col-md-6 {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+#main {
+    background-color: black;
+}
+
+#form {
+    text-align: center;
 }
 
 #title {
@@ -14,11 +31,9 @@
     padding: 35px;
 }
 
-#graph {
-    color: antiquewhite;
-    text-align: center;
-    background-color: white;
-    padding: 100px;
+#makeClear {
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 #graphTitle {
@@ -43,15 +58,9 @@ stop, start, task, client {
     background-color: black;
 }
 
-/* #nextChart {
-    
-} */
 
-/* .modal.active {
-    transform: translate(-50%, -50%) scale(1);
-}
 
-.modal {
+/* .modal {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -106,8 +115,4 @@ stop, start, task, client {
 
 #overlay.active {
     opacity: 1;
-    pointer-events: all;
-} */
-
-
-
+    pointer-events: all; */

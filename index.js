@@ -3,8 +3,9 @@ let endTime = document.getElementById('stop');
 const btn1 = document.getElementById('timeButton');
 const clearButton = document.getElementById('clearTable');
 var startparts, endparts, startDate, endDate;
-let hourSlot, minuteSlot, timeDelta, timeObj, delta, runTot, fillTotal, hour, min, array;
+let hourSlot, minuteSlot, timeDelta, timeObj, delta, runTot, fillTotal, hour, min, array, inDecimal;
 let totHour = 0, totMin = 0
+let objArray = []
 
 // This function finds the delta between two times provided by user
 function findDelta() {
@@ -45,6 +46,7 @@ function milisecToHour(delta) {
     sixtyToHour(hourSlot, minuteSlot)
     hourSlot = array[0]
     minuteSlot = array[1]
+    inDecimal = hourSlot + (minuteSlot/60)
     timeDelta = `${String(hourSlot)}:${String(minuteSlot)}`
 }
 
@@ -57,14 +59,15 @@ function rounding() {
     }
 }
 
-
 // creates an object for the work table
 function makeObj() {
     timeObj = {company: document.getElementById('client').value,
         task: document.getElementById('task').value,
         start: document.getElementById('start').value,
         end: document.getElementById('stop').value,
-        timeDiff: String(timeDelta)}
+        timeDecimal: inDecimal,
+        timeDiff: String(timeDelta)};
+    objArray.push(timeObj)
 }
 
 // this adds a running total of time worked to the table
@@ -76,7 +79,7 @@ function runningTotal() {
     totMin = array[1]
     runTot = `${String(totHour)}:${String(totMin)}`;
     fillTotal = document.getElementById("tabTotal");
-    fillTotal.innerHTML = String(runTot);
+    fillTotal.innerText = String(runTot);
 }
 
 // adds an hour when minutes reaches 61 
@@ -94,15 +97,15 @@ function fillTable(item) {
     const table = document.getElementById("tableBody");
     let row = table.insertRow();
     let company = row.insertCell(0);
-    company.innerHTML = item.company;
+    company.innerText = item.company;
     let task = row.insertCell(1);
-    task.innerHTML = item.task;
+    task.innerText = item.task;
     let start = row.insertCell(2);
-    start.innerHTML = item.start;
+    start.innerText = item.start;
     let end = row.insertCell(3);
-    end.innerHTML = item.end;
+    end.innerText = item.end;
     let diff = row.insertCell(4);
-    diff.innerHTML = item.timeDiff;
+    diff.innerText = item.timeDiff;
 }
 
 // clears fields after information is logged
@@ -128,64 +131,59 @@ function logTime() {
 
 // clears table
 function clearTable(){
-    document.getElementById('tableBody').innerHTML="";
-    fillTotal.innerHTML = '';
+    document.getElementById('tableBody').innerText="";
+    fillTotal.innerText = '';
     runTot = '', totHour = 0, totMin = 0;
 }
 
 btn1.addEventListener('click', logTime);
 clearButton.addEventListener('click', clearTable);
 
+
+/// all functions for creating graphs 
+// makes an object of client and total time 
+
 let graphb1 = document.getElementById('graphButton');
+let graphClear = document.getElementById('clearGraph');
+let cliList = [], timeList = [], taskList = [];
 
-const ctx = document.getElementById('myChart');
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['2020','2021','2022','2023'],
-        datasets: [{
-            label: "things happenin",
-            data: [4, 12, 3, 7],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                title: {
-                    display: true,
-                    text: 'Hours'
-                },
-                beginAtZero: true,
-            },
-            x: {
-                title: {
-                    display: true,
-                    text: 'Clients'
-                },
-            }
-       }
+function chartLists() {
+    for (i in objArray) {
+        cliList.push(objArray[i].company)
+        timeList.push(objArray[i].timeDecimal)
+        taskList.push(objArray[i].task)
     }
-});
+}
 
-
+let ctx = document.getElementById('myChart');
 const piect = document.getElementById('nextChart');
-new Chart(piect, {
-    type: 'pie',
-    data: {
-        labels: ['2020','2021','2022','2023'],
-        datasets: [{
-            label: "things happenin",
-            data: [4, 12, 3, 7],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
-});
+let barChart, pieChart
+
+function makeBarChart() {
+    Chart.defaults.font.size = 25;
+    Chart.defaults.font.color = 'white';
+    barChart = new Chart(ctx, {type: 'bar', data: {labels: cliList,datasets: [{label: "Hours Per Client",data: timeList,borderWidth: 1}]}, options: { plugins: {legend: {labels: {font: {size: 30}}}}, responsive: true, scales: {y: {title: {display: true,text: 'Hours'}, beginAtZero: true,} ,x: {title: {display: true,text: 'Clients'}}}}});
+    pieChart = new Chart(piect, {type: 'pie', data: {labels: taskList, datasets: [{label: "Time Per Task", data: timeList, borderWidth: 1}]}, options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {labels: {font: {size: 30}}}}}});
+}
+
+// barChart = new Chart(ctx, {type: 'bar', data: {labels: cliList,datasets: [{label: "Hours Per Client",data: timeList,borderWidth: 1}]}, options: { plugins: {legend: {labels: {font: {size: 30}}}},responsive: true, scales: {y: {title: {display: true,text: 'Hours'}, beginAtZero: true,} ,x: {title: {display: true,text: 'Clients'}}}}});
+
+
+
+function makeGraphs() {
+    chartLists();
+    makeBarChart();
+}
+
+graphb1.addEventListener('click', makeGraphs);
+graphClear.addEventListener('click', clearGraph);
+
+function clearGraph() {
+    barChart.destroy();
+    pieChart.destroy();
+    cliList = [], timeList = [], taskList = [], objArray = [];
+}
+
 
 // const openModalButton = document.getElementById('modalButton')
 // const openModalButton = document.querySelectorAll('[data-modal-target]')
