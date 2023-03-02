@@ -134,6 +134,7 @@ function clearTable(){
     document.getElementById('tableBody').innerText="";
     fillTotal.innerText = '';
     runTot = '', totHour = 0, totMin = 0;
+    clearGraph()
 }
 
 btn1.addEventListener('click', logTime);
@@ -141,84 +142,58 @@ clearButton.addEventListener('click', clearTable);
 
 
 /// all functions for creating graphs 
-// makes an object of client and total time 
 
 let graphb1 = document.getElementById('graphButton');
 let graphClear = document.getElementById('clearGraph');
-let cliList = [], timeList = [], taskList = [];
+let cliList = [], cliTime = [], taskList = [], taskTime=[];
 
+//creates required lists of labels and data for charts.js
 function chartLists() {
-    for (i in objArray) {
-        cliList.push(objArray[i].company)
-        timeList.push(objArray[i].timeDecimal)
-        taskList.push(objArray[i].task)
+    listsForCharts(objArray, cliList, cliTime, 'company');
+    listsForCharts(objArray, taskList, taskTime, 'task');
+}
+
+// totals time for indivual task or client
+function listsForCharts(array1, list1, list2, key) {
+    for (i in array1) {
+        let obj = array1[i]
+        if (list1.includes(obj[key])) {
+            let spot = list1.indexOf(obj[key])
+            list2[spot] += array1[1].timeDecimal
+        } else {
+            list1.push(obj[key])
+            list2.push(array1[i].timeDecimal)
+        }
     }
 }
 
+// declared chart variables 
 let ctx = document.getElementById('myChart');
 const piect = document.getElementById('nextChart');
 let barChart, pieChart
 
+// makes charts
 function makeBarChart() {
     Chart.defaults.font.size = 25;
     Chart.defaults.font.color = 'white';
-    barChart = new Chart(ctx, {type: 'bar', data: {labels: cliList,datasets: [{label: "Hours Per Client",data: timeList,borderWidth: 1}]}, options: { plugins: {legend: {labels: {font: {size: 30}}}}, responsive: true, scales: {y: {title: {display: true,text: 'Hours'}, beginAtZero: true,} ,x: {title: {display: true,text: 'Clients'}}}}});
-    pieChart = new Chart(piect, {type: 'pie', data: {labels: taskList, datasets: [{label: "Time Per Task", data: timeList, borderWidth: 1}]}, options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {labels: {font: {size: 30}}}}}});
+    barChart = new Chart(ctx, {type: 'bar', data: {labels: cliList,datasets: [{label: "Hours Per Client",data: cliTime,borderWidth: 1}]}, options: { plugins: {legend: {labels: {font: {size: 30}}}}, responsive: true, scales: {y: {title: {display: true,text: 'Hours'}, beginAtZero: true,} ,x: {title: {display: true,text: 'Clients'}}}}});
+    pieChart = new Chart(piect, {type: 'pie', data: {labels: taskList, datasets: [{label: "Time Per Task", data: taskTime, borderWidth: 1}]}, options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {labels: {font: {size: 30}}}}}});
 }
 
-// barChart = new Chart(ctx, {type: 'bar', data: {labels: cliList,datasets: [{label: "Hours Per Client",data: timeList,borderWidth: 1}]}, options: { plugins: {legend: {labels: {font: {size: 30}}}},responsive: true, scales: {y: {title: {display: true,text: 'Hours'}, beginAtZero: true,} ,x: {title: {display: true,text: 'Clients'}}}}});
-
-
-
+// creates graph from leger objects
 function makeGraphs() {
     chartLists();
     makeBarChart();
 }
 
+// button listeners
 graphb1.addEventListener('click', makeGraphs);
 graphClear.addEventListener('click', clearGraph);
 
+
+// deletes graphs from browser 
 function clearGraph() {
     barChart.destroy();
     pieChart.destroy();
-    cliList = [], timeList = [], taskList = [], objArray = [];
+    cliList = [], cliTime = [], taskList = [], objArray = [], taskTime=[];
 }
-
-
-// const openModalButton = document.getElementById('modalButton')
-// const openModalButton = document.querySelectorAll('[data-modal-target]')
-// const closeModalButton = document.querySelectorAll('[data-close-button]')
-// const overlay = document.getElementById("overlay")
-
-// openModalButton.forEach(button => {
-//     button.addEventListener('click', () => {
-//         const modal = document.querySelector(button.datset.modalTarget)
-//         openModal(modal)
-//     })
-// })
-
-// overlay.addEventListener('click', () => {
-//     const modals = document.querySelectorAll('.modal.active')
-//     modals.forEach(modal => {
-//         closeModal(modal)
-//     })
-// })
-
-// closeModalButton.forEach(button => {
-//     button.addEventListener('click', () => {
-//         const modal = button.closest('.modal')
-//         closeModal(modal)
-//     })
-// })
-
-// function openModal(modal) {
-//     modal.classlist.add('active')
-//     overlay.classlist.add('active')
-// }
-
-// function closeModal(modal) {
-//     modal.classlist.remove('active')
-//     overlay.classlist.remove('active')
-// }
-
-// script for making a graph from collected information

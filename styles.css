@@ -1,28 +1,32 @@
+.col-2 {
+    background-color: aqua;
+    padding-top: 1%;
+}
+
 .col-4 {
     background-color: aqua;
-    text-align: right;
-    padding: 100px;
-    font-weight: bold;
-    font-size: 1.5rem;
+    text-align: left;
+    padding-top: 1%;
 }
 
-.col-xl-8 {
+.form-inline {
+    display: inline-block;
+}
+
+#row1 {
+    text-align: center;
+    /* padding: 100px; */
+    font-weight: bold;
+}
+
+.col-xl-6 {
     background-color: plum;
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
-.col-md-6 {
     font-weight: bold;
     font-size: 1.5rem;
 }
 
 #main {
     background-color: black;
-}
-
-#form {
-    text-align: center;
 }
 
 #title {
@@ -34,10 +38,12 @@
 #makeClear {
     font-weight: bold;
     font-size: 1.5rem;
+    text-align: center;
 }
 
 #graphTitle {
     color: antiquewhite;
+    font-size: 1.5rem;
     text-align: center;
     background-color: black;
 }
@@ -57,62 +63,3 @@ stop, start, task, client {
 #graphArea {
     background-color: black;
 }
-
-
-
-/* .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: 200ms ease-in-out;
-    border: 1px solid black;
-    border-radius: 10px;
-    z-index: 10;
-    background-color: white;
-    width: 500px;
-    max-width: 80%;
-}
-
-.modal-head {
-    background-color: blue;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid black;
-}
-
-.modal-title {
-    color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.modal-head .close-button {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.modal-body {
-    padding: 10px;
-}
-
-#overlay {
-    position: fixed;
-    opacity: 0;
-    transition: 200ms ease-in-out;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: black .5;
-    pointer-events: none;
-}
-
-#overlay.active {
-    opacity: 1;
-    pointer-events: all; */
